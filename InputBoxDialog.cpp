@@ -1,12 +1,12 @@
-// TemplateDialog.cpp
+// InputBoxDialog.cpp
 
-#include "TemplateDialog.h"
+#include "InputBoxDialog.h"
 
 // Global variables
 static LPTSTR g_lpszInputText;
 static LPTSTR g_lpszTitle;
 
-BOOL TemplateDialogPositionToMouse( HWND hWndDialog )
+BOOL InputBoxDialogPositionToMouse( HWND hWndDialog )
 {
 	BOOL bResult = FALSE;
 
@@ -64,9 +64,9 @@ BOOL TemplateDialogPositionToMouse( HWND hWndDialog )
 
 	return bResult;
 
-} // End of function TemplateDialogPositionToMouse
+} // End of function InputBoxDialogPositionToMouse
 
-INT_PTR CALLBACK TemplateDialogProcedure( HWND hWndDialog, UINT uMessage, WPARAM wParam, LPARAM )
+INT_PTR CALLBACK InputBoxDialogProcedure( HWND hWndDialog, UINT uMessage, WPARAM wParam, LPARAM )
 {
 	BOOL bResult = FALSE;
 
@@ -78,7 +78,7 @@ INT_PTR CALLBACK TemplateDialogProcedure( HWND hWndDialog, UINT uMessage, WPARAM
 			// An init dialog message
 
 			// Position template dialog to mouse
-			TemplateDialogPositionToMouse( hWndDialog );
+			InputBoxDialogPositionToMouse( hWndDialog );
 
 			// Set title
 			SetDlgItemText( hWndDialog, IDC_TITLE, g_lpszTitle );
@@ -143,9 +143,9 @@ INT_PTR CALLBACK TemplateDialogProcedure( HWND hWndDialog, UINT uMessage, WPARAM
 
 	return bResult;
 
-} // End of function TemplateDialogProcedure
+} // End of function InputBoxDialogProcedure
 
-BOOL TemplateDialog( HWND hWndParent, HINSTANCE hInstance, LPTSTR lpszInputText, LPCTSTR lpszTitle )
+BOOL InputBoxDialog( HWND hWndParent, HINSTANCE hInstance, LPTSTR lpszInputText, LPCTSTR lpszTitle )
 {
 	BOOL bResult = FALSE;
 
@@ -158,7 +158,7 @@ BOOL TemplateDialog( HWND hWndParent, HINSTANCE hInstance, LPTSTR lpszInputText,
 	lstrcpy( g_lpszTitle,		lpszTitle );
 
 	// Show template dialog
-	if( DialogBox( hInstance, MAKEINTRESOURCE( IDD_TEMPLATE_DIALOG ), hWndParent, TemplateDialogProcedure ) == IDOK )
+	if( DialogBox( hInstance, MAKEINTRESOURCE( IDD_INPUT_BOX_DIALOG ), hWndParent, InputBoxDialogProcedure ) == IDOK )
 	{
 		// Dialog box was shown and ok button was pressed
 
@@ -176,4 +176,4 @@ BOOL TemplateDialog( HWND hWndParent, HINSTANCE hInstance, LPTSTR lpszInputText,
 
 	return bResult;
 
-} // End of function TemplateDialog
+} // End of function InputBoxDialog
